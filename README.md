@@ -1,40 +1,63 @@
-# ⚡ ESP32 AD8232 OLED ECG Monitor
+ AD8232 Breakout Board
 
-This project implements a single-lead Electrocardiogram (ECG) monitor using the AD8232 Heart Rate Sensor, an ESP32 microcontroller, and a 128x64 I2C OLED display.
+A custom ECG signal acquisition breakout built around the AD8232 analog front-end IC.
+This board is designed to amplify and filter weak biopotential signals from the human body, making them suitable for reading by microcontrollers such as ESP32, Arduino, or other data logging systems.
 
-It reads the amplified heart signal, calculates the Beats Per Minute (BPM), and displays both the BPM and a real-time ECG trace directly on the OLED, eliminating the need for a PC or Processing IDE.
+ Features
 
-## 📌 Hardware Components
+Core IC: AD8232 – Low-power, single-lead ECG front-end
 
-* **Microcontroller:** ESP32 Development Board
-* **ECG Sensor:** AD8232 Heart Rate Monitor
-* **Display:** 128x64 I2C SSD1306 OLED Display
-* **Electrode Pads:** 3-Lead ECG cable and pads
+Input Connector (J2): 3.5 mm jack for ECG electrodes
 
-## 🔌 Wiring Diagram (ESP32)
+Output Connector (J3): 6-pin header for MCU interface (OUTPUT, LO+, LO–, 3.3 V, GND, etc.)
 
-| Component Pin | ESP32 Pin | Function |
-| :---: | :---: | :--- |
-| **AD8232 OUTPUT** | **GPIO 34 (ADC1\_CH6)** | Analog ECG Signal |
-| **AD8232 LO+** | **GPIO 32** | Leads Off Positive |
-| **AD8232 LO-** | **GPIO 33** | Leads Off Negative |
-| **AD8232 3.3V** | **3.3V** | Power Supply |
-| **AD8232 GND** | **GND** | Ground |
-| **OLED SDA** | **GPIO 21** | I2C Data |
-| **OLED SCL** | **GPIO 22** | I2C Clock |
-| **OLED VCC** | **3.3V** | Power Supply |
-| **OLED GND** | **GND** | Ground |
+Power Connector (J1): JST input, 3.3 V supply
 
-## 📚 Libraries Required
+Filter Network: Configurable high-pass and low-pass filters for clean ECG waveform extraction
 
-Ensure these libraries are installed via the Arduino Library Manager:
+Compact Layout: Small and wearable-friendly design
 
-1.  **Adafruit SSD1306** (For OLED control)
-2.  **Adafruit GFX Library** (For graphics core)
+Clear Silkscreen Labels: Simplifies assembly and debugging
 
-## ⚙️ Calibration Note
+ Applications
 
-The **`threshold`** value used for BPM calculation is critical and may need tuning based on your specific sensor placement and body type:
+ECG and heartbeat monitoring
 
-```cpp
-int threshold = 550; // Adjust this value.
+Biomedical instrumentation
+
+Wearable health systems
+
+Signal processing and biosensor R&D
+
+Educational or prototyping projects
+
+ Design Details
+
+Software: Altium Designer
+
+Layers: 2-layer PCB
+
+Board Size: Compact form factor for easy integration
+
+Designer: KESAVA
+
+ Usage
+ Hardware Setup
+
+Connect Electrodes
+Plug your ECG electrode cable into the 3.5 mm jack (J2).
+
+RA → Right arm
+
+LA → Left arm
+
+RL → Right leg (ground/reference)
+
+Connect to Microcontroller (J3 pins)
+
+Pin	Description
+3.3V	Power supply (3.0–3.3 V only)
+GND	Ground
+OUTPUT	Analog ECG output
+LO+	Lead-off detection +
+LO–	Lead-off detection –
